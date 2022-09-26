@@ -69,7 +69,7 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 		} finally {
 			IOUtils.closeQuietly(in);
 			IOUtils.closeQuietly(out);
-			IOUtils.close(connection);
+			IOUtils.closeQuietly(connection);
 		}
 	}
 
