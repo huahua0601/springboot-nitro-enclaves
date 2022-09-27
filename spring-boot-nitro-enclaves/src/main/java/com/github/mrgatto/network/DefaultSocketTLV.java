@@ -21,7 +21,7 @@ public class DefaultSocketTLV implements SocketTLV {
 
 		LOG.trace("Writing {} bytes of data", content.length);
 
-		byte length[] = new byte[Integer.BYTES];
+		byte[] length = new byte[Integer.BYTES];
 	    Conversion.intToByteArray(content.length, 0, length, 0, length.length);
 
 	    output.write(length);
