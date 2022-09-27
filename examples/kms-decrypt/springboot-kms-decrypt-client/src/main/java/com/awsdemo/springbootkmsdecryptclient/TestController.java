@@ -49,6 +49,17 @@ public class TestController {
         return response.getData().getValue();
     }
 
+    @GetMapping("echo")
+    public String echo() {
+        MyPojoData pojo = new MyPojoData();
+        pojo.setValue(String.valueOf(System.currentTimeMillis()));
+        EnclaveRequest<MyPojoData> request = new EnclaveRequest<>();
+        request.setAction(Actions.ECHO.name());
+        request.setData(pojo);
+        EnclaveResponse<MyPojoDataResult> response = nitroEnclaveClient.send(request);
+        return response.getData().getValue();
+    }
+
 
     @GetMapping("testsign")
     public SignVerifyResult testsign(@RequestParam String keyId, @RequestParam String userId, @RequestParam String rawMessage) {
