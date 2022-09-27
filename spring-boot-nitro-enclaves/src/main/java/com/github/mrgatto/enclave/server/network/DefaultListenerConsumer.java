@@ -3,6 +3,7 @@ package com.github.mrgatto.enclave.server.network;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -64,12 +65,11 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 
 			byte[] rcvd = this.socketTLV.receiveContent(in);
 
-			byte[] output = this.processEnclaveRequest(rcvd);
-			this.socketTLV.sendContent(output, out);
+			//byte[] output = this.processEnclaveRequest(rcvd);
+			this.socketTLV.sendContent("123".getBytes(StandardCharsets.UTF_8), out);
 		} finally {
 			IOUtils.closeQuietly(in);
 			IOUtils.closeQuietly(out);
-			connection.close();
 		}
 	}
 
