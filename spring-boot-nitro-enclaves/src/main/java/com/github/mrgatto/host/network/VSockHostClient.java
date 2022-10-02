@@ -1,5 +1,6 @@
 package com.github.mrgatto.host.network;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -48,8 +49,12 @@ public class VSockHostClient extends AbstractSocketHostClient {
 			LOG.error("VSock error", e);
 			throw new RuntimeException(e.getMessage(), e);
 		} finally {
-			IOUtils.closeQuietly(out);
-			IOUtils.closeQuietly(in);
+			try {
+				out.flush();
+				in = null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			if (clientSocket != null)
 				instance.releaseConnection(clientSocket);
 		}
