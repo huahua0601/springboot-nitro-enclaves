@@ -48,8 +48,8 @@ public class VSockHostClient extends AbstractSocketHostClient {
 			LOG.error("VSock error", e);
 			throw new RuntimeException(e.getMessage(), e);
 		} finally {
-			//IOUtils.closeQuietly(out);
-			//IOUtils.closeQuietly(in);
+			IOUtils.closeQuietly(out);
+			IOUtils.closeQuietly(in);
 			if (clientSocket != null)
 				instance.releaseConnection(clientSocket);
 		}
