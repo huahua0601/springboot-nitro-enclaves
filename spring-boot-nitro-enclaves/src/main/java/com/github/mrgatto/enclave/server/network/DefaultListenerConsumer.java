@@ -44,7 +44,7 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 		contextRefreshedEvent.getApplicationContext().getBeansOfType(ActionHandler.class)
 			.values()
-			.forEach(handler -> this.handlers.add(handler));
+			.forEach(this.handlers::add);
 
 		String loadedHandlers = this.handlers.stream()
 				.map(ClassUtils::getSimpleName)

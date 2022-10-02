@@ -3,6 +3,8 @@ package com.github.mrgatto.host.network;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.github.mrgatto.host.socketpool.ConnectionManager;
+import com.github.mrgatto.host.socketpool.ConnectionManagerSingleton;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +32,7 @@ public class VSockHostClient extends AbstractSocketHostClient {
 		OutputStream out = null;
 
 		try {
-			clientSocket = new VSock(new VSockAddress(this.cid, this.port));
+			clientSocket = ConnectionManagerSingleton.getInstance(new VSockAddress(5, 5000)).getConnection();
 
 			in = clientSocket.getInputStream();
 			out = clientSocket.getOutputStream();
