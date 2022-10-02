@@ -26,6 +26,7 @@ public class DefaultSocketTLV implements SocketTLV {
 
 	    output.write(length);
 	    output.write(content);
+		output.flush();
 	}
 
 	@Override

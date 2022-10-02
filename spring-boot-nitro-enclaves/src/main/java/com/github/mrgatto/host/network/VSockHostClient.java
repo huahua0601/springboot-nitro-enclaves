@@ -49,12 +49,6 @@ public class VSockHostClient extends AbstractSocketHostClient {
 			LOG.error("VSock error", e);
 			throw new RuntimeException(e.getMessage(), e);
 		} finally {
-			try {
-				out.flush();
-				in = null;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			if (clientSocket != null)
 				instance.releaseConnection(clientSocket);
 		}
