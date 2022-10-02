@@ -1,5 +1,6 @@
 package com.github.mrgatto.host.socketpool;
 
+import lombok.extern.slf4j.Slf4j;
 import solutions.cloudarchitects.vsockj.VSock;
 import solutions.cloudarchitects.vsockj.VSockAddress;
 
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+@Slf4j
 public class ConnectionManager {
 
     private int cid = 5;
@@ -49,6 +51,7 @@ public class ConnectionManager {
 
     public VSock getConnection() throws Exception {
         lock.lock();
+        log.info("Current connection total count:{}", totalCount);
         try {
             VSock connection = null;
             while (true) {

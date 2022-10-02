@@ -30,9 +30,9 @@ public class VSockHostClient extends AbstractSocketHostClient {
 		VSock clientSocket = null;
 		InputStream in = null;
 		OutputStream out = null;
-
+		ConnectionManager instance = ConnectionManagerSingleton.getInstance(new VSockAddress(5, 5000));
 		try {
-			clientSocket = ConnectionManagerSingleton.getInstance(new VSockAddress(5, 5000)).getConnection();
+			clientSocket = instance.getConnection();
 
 			in = clientSocket.getInputStream();
 			out = clientSocket.getOutputStream();
@@ -48,9 +48,10 @@ public class VSockHostClient extends AbstractSocketHostClient {
 			LOG.error("VSock error", e);
 			throw new RuntimeException(e.getMessage(), e);
 		} finally {
-			IOUtils.closeQuietly(out);
-			IOUtils.closeQuietly(in);
-			IOUtils.closeQuietly(clientSocket);
+			//IOUtils.closeQuietly(out);
+			//IOUtils.closeQuietly(in);
+			if (clientSocket != null)
+				instance.releaseConnection(clientSocket);
 		}
 	}
 
