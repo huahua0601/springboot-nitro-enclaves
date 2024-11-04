@@ -23,6 +23,8 @@ public class KMSClientProducer {
                                     new AWSStaticCredentialsProvider(new BasicSessionCredentials(credentials.getAccessKeyId(),credentials.getSecretAccessKey(),credentials.getSessionToken()))).build();
                 }
             }
+
+
         }
         return kmsClient;
     }
